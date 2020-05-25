@@ -24,22 +24,14 @@ const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
 
-app.set('view engine', 'pug');
-app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'pug');
+// app.set('views', path.join(__dirname, 'views'));
 
 /**
  * MIDDLEWARES
  */
 
 //global middleware
-
-//serving static files
-if (process.env.NODE_ENV.trim() === 'production') {
-  app.use(express.static('client/build'));
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-  });
-}
 
 //set security HTTP headers
 app.use(helmet());
@@ -128,6 +120,14 @@ app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/bookings', bookingRouter);
+
+//serving static files
+if (process.env.NODE_ENV.trim() === 'production') {
+  app.use(express.static('client/build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 app.all('*', (req, res, next) => {
   // res.status(404).json({
