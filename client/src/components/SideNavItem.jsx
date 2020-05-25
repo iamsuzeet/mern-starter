@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const SideNavItem = ({ link, text, icon, active }) => {
   return (
     <li className={active ? 'side-nav--active' : undefined}>
-      <a href={link}>
+      <Link to={link}>
         <svg>
           <use xlinkHref={`/img/icons.svg#icon-${icon}`}></use>
         </svg>
         {text}
-      </a>
+      </Link>
     </li>
   );
 };

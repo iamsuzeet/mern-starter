@@ -88,7 +88,11 @@ class Account extends Component {
                 icon="settings"
                 active={true}
               />
-              <SideNavItem link="#" text="My bookings" icon="briefcase" />
+              <SideNavItem
+                link="/my-booking"
+                text="My bookings"
+                icon="briefcase"
+              />
               <SideNavItem link="#" text="My reviews" icon="star" />
               <SideNavItem link="#" text="Billing" icon="credit-card" />
             </ul>

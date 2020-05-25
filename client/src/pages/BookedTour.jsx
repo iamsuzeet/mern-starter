@@ -22,6 +22,7 @@ class BookedTour extends React.Component {
   }
 
   render() {
+    document.title = 'Natours | My Bookings';
     const { tours, isLoading } = this.props;
     if (isLoading) return <Spinner />;
 
