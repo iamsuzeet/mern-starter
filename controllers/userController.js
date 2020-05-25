@@ -1,5 +1,6 @@
 const multer = require('multer');
 const sharp = require('sharp');
+const path = require('path');
 const User = require('../models/userModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
@@ -28,11 +29,21 @@ exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
     req.file.originalname.split('.')[0]
   }.jpeg`;
 
+  const filePath = path.join(
+    __dirname,
+    '../',
+    'client',
+    'public',
+    'img',
+    'users',
+    `${req.file.filename}`
+  );
+
   await sharp(req.file.buffer)
     .resize(500, 500)
     .toFormat('jpeg')
     .jpeg({ quality: 90 })
-    .toFile(`client/public/img/users/${req.file.filename}`);
+    .toFile(filePath);
 
   next();
 });
