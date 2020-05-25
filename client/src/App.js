@@ -20,6 +20,11 @@ import { checkUserLoggedInAsync } from './redux/user/user-action';
 toast.configure({
   autoClose: 4000,
   draggable: false,
+  style: {
+    fontSize: '18px',
+    width: '400px',
+  },
+  position: 'top-center',
 });
 
 class App extends React.Component {

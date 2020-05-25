@@ -24,14 +24,21 @@ const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
 
-// app.set('view engine', 'pug');
-// app.set('views', path.join(__dirname, 'views'));
+app.enable('trust proxy');
+
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
 
 /**
  * MIDDLEWARES
  */
 
 //global middleware
+
+// app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
+app.use(cors());
+
+app.options('*', cors());
 
 //set security HTTP headers
 app.use(helmet());
@@ -46,11 +53,6 @@ const limiter = rateLimit({
   windowMs: 60 * 60 * 1000,
   message: 'Too many request from this IP, please try again in an hour!',
 });
-
-// app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
-app.use(cors({ credentials: true }));
-
-app.options('*', cors());
 
 app.use('/api', limiter);
 
