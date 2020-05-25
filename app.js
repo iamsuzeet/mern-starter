@@ -55,7 +55,8 @@ const limiter = rateLimit({
   message: 'Too many request from this IP, please try again in an hour!',
 });
 
-app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
+// app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
+app.use(cors({ credentials: true }));
 
 app.options('*', cors());
 
@@ -122,7 +123,7 @@ app.use((req, res, next) => {
 // app.patch(`${endpoint}/:id`, updateTour);
 // app.delete(`${endpoint}/:id`, deleteTour);
 
-app.use('/', viewRouter);
+app.use('/api/v1/views', viewRouter);
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);

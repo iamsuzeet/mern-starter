@@ -19,7 +19,7 @@ class SingleTour extends React.Component {
   getTour = async (slug) => {
     const res = await axios({
       method: 'GET',
-      url: `/overview/${slug}`,
+      url: `/api/v1/views/overview/${slug}`,
       withCredentials: true,
     });
 

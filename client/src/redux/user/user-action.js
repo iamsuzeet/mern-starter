@@ -141,7 +141,7 @@ export const checkUserLoggedInAsync = () => {
   return async (dispatch) => {
     const res = await axios({
       method: 'GET',
-      url: '/',
+      url: '/api/v1/views',
       withCredentials: true,
     });
 
