@@ -11,6 +11,8 @@ class BookedTour extends React.Component {
     const { fetchTourStartAsync } = this.props;
     fetchTourStartAsync('/api/v1/bookings/my-booking');
     if (this.props.location.search.split('=')[1] === 'booking') {
+      this.props.history.push('/my-booking');
+
       toast.success(
         "Your booking was successful! Please check your email for a confirmation. If your booking doesn't show up here immediatly, please come back later.",
         {

@@ -77,7 +77,7 @@ class Signup extends React.Component {
             <FormButton
               className="form__group"
               btnClass="btn btn--green"
-              buttonText="Sign up"
+              buttonText="Register"
             />
           </form>
         </div>

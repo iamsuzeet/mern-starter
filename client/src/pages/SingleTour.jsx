@@ -160,7 +160,7 @@ class SingleTour extends React.Component {
         <img
           src={`/img/tours/${image}`}
           alt={`${name} ${index + 1}`}
-          className="picture-box__img picture-box__img--1"
+          className={`picture-box__img picture-box__img--${index + 1}`}
         />
       </div>
     );
@@ -300,7 +300,7 @@ class SingleTour extends React.Component {
               <img
                 src={`/img/tours/${tour.images[2]}`}
                 alt={`${tour.name} pics`}
-                className="cta__img cta__img--1"
+                className="cta__img cta__img--2"
               />
               <div className="cta__content">
                 <h2 className="heading-secondary">What are you waiting for?</h2>
@@ -311,7 +311,7 @@ class SingleTour extends React.Component {
                 </p>
                 <button
                   onClick={this.bookTour}
-                  className="btn btn--green span-all-row"
+                  className="btn btn--green span-all-row grid-button"
                 >
                   Book tour now!
                 </button>
