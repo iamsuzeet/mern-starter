@@ -3,6 +3,7 @@ import * as actionTypes from './user-actiontypes';
 const INITIAL_STATE = {
   currentUser: null,
   error: null,
+  isFetching: true,
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -21,6 +22,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         currentUser: action.payload,
         error: null,
+        isFetching: false,
       };
 
     case actionTypes.SIGN_OUT_SUCCESS:
@@ -28,6 +30,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         currentUser: null,
         error: null,
+        isFetching: true,
       };
 
     case actionTypes.SIGN_IN_FAILURE:
@@ -37,6 +40,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         error: action.payload,
+        isFetching: false,
       };
     default:
       return state;
