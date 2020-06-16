@@ -5,6 +5,7 @@ import FormButton from '../components/FormButton';
 import { connect } from 'react-redux';
 import { signInStartAsync } from './../redux/user/user-action';
 import { toast } from 'react-toastify';
+import Spinner from '../components/Spinner';
 
 class Login extends React.Component {
   constructor(props) {
@@ -17,14 +18,8 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
-    this.toaster = setTimeout(() => {
-      if (this.props.match.url === '/me' && !this.props.currentUser)
-        toast.error('Please Login to get access', { autoClose: 1500 });
-    }, 2000);
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.toaster);
+    if (this.props.match.url === '/me' && !this.props.currentUser)
+      toast.error('Please Login to get access', { autoClose: 2000 });
   }
 
   handleSubmit = async (e) => {
@@ -76,13 +71,16 @@ class Login extends React.Component {
   };
 
   render() {
+    const { isFetching } = this.props;
     document.title = 'Natours | Login';
+    if (!isFetching) return <Spinner />;
     return this.formTemplate();
   }
 }
 
 const mapStateToProps = (state) => ({
   currentUser: state.user.currentUser,
+  isFetching: state.user.isFetching,
 });
 
 const mapDispatchToProps = (dispatch) => ({
