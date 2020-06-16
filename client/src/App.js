@@ -12,6 +12,8 @@ import Signup from './pages/Signup';
 import Account from './pages/Account';
 import BookedTour from './pages/BookedTour';
 
+import ProtectedRoute from './components/ProtectedRoute';
+
 import { toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -28,9 +30,9 @@ toast.configure({
 });
 
 class App extends React.Component {
-  componentDidMount() {
+  async componentDidMount() {
     const { checkUserLoggedInAsync } = this.props;
-    checkUserLoggedInAsync();
+    await checkUserLoggedInAsync();
   }
 
   render() {
@@ -43,30 +45,22 @@ class App extends React.Component {
           <Route path="/tour/:slug" component={SingleTour} />
           <Route path="/not-found" component={Error404} />
 
-          <Route
-            path="/login"
-            render={(props) =>
-              currentUser ? <Redirect to="/" /> : <Login {...props} />
-            }
-          />
-          <Route
-            path="/signup"
-            render={(props) =>
-              currentUser ? <Redirect to="/" /> : <Signup {...props} />
-            }
-          />
-          <Route
+          <ProtectedRoute
             path="/me"
-            render={(props) =>
-              !currentUser ? <Login {...props} /> : <Account {...props} />
-            }
+            component={Login}
+            mainComponent={Account}
+            redirectLocation="/login"
           />
-          <Route
+
+          <ProtectedRoute
             path="/my-booking"
-            render={(props) =>
-              !currentUser ? <Login {...props} /> : <BookedTour {...props} />
-            }
+            component={Login}
+            mainComponent={BookedTour}
+            redirectLocation="/login"
           />
+
+          <ProtectedRoute path="/login" component={Login} />
+          <ProtectedRoute path="/signup" component={Signup} />
           <Route exact path="/" component={Tours} />
           <Redirect to="/not-found" />
         </Switch>
