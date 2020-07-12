@@ -40,9 +40,10 @@ const createSendToken = (user, statusCode, res, req) => {
 
 exports.signup = catchAsync(async (req, res, next) => {
   const newUser = await User.create(req.body);
-  const url = `${req.protocol}://${req.get('host')}/me`;
+  // sendgrid signedup mail
+  // const url = `${req.protocol}://${req.get('host')}/me`;
 
-  await new Email(newUser, url).sendWelcome();
+  // await new Email(newUser, url).sendWelcome();
 
   createSendToken(newUser, 201, res, req);
 });
