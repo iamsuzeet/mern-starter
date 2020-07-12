@@ -37,10 +37,10 @@ class App extends React.Component {
 
   render() {
     document.title = 'Natours | Exciting tours for adventurous people';
-    const { currentUser } = this.props;
+
     return (
       <>
-        <Header currentUser={currentUser} />
+        <Header />
         <Switch>
           <Route path="/tour/:slug" component={SingleTour} />
           <Route path="/not-found" component={Error404} />
@@ -70,12 +70,8 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
-});
-
 const mapDispatchToProps = (dispatch) => ({
   checkUserLoggedInAsync: () => dispatch(checkUserLoggedInAsync()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);
